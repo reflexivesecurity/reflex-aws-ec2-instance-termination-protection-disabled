@@ -1,10 +1,25 @@
 module "reflex_aws_ec2_instance_termination_protection_disabled" {
   source           = "git::https://github.com/cloudmitigator/reflex-engine.git//modules/cwe_lambda?ref=v0.5.4"
   rule_name        = "InstanceTerminationProtectionDisabled"
-  rule_description = "TODO: Provide rule description"
+  rule_description = "Rule to detect when an ec2 instance has instance protection disabled."
 
   event_pattern = <<PATTERN
-# TODO: Provide event pattern
+{
+  "source": [
+    "aws.ec2"
+  ],
+  "detail-type": [
+    "AWS API Call via CloudTrail"
+  ],
+  "detail": {
+    "eventSource": [
+      "ec2.amazonaws.com"
+    ],
+    "eventName": [
+      "ModifyInstanceAttribute"
+    ]
+  }
+}
 PATTERN
 
   function_name   = "InstanceTerminationProtectionDisabled"
@@ -15,9 +30,6 @@ PATTERN
     SNS_TOPIC = var.sns_topic_arn,
     
   }
-  custom_lambda_policy = <<EOF
-# TODO: Provide required lambda permissions policy
-EOF
 
 
 
