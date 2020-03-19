@@ -1,0 +1,49 @@
+{
+    "version": "0",
+    "id": "6c2dddf-3d36-c827-4183-60333335356",
+    "detail-type": "AWS API Call via CloudTrail",
+    "source": "aws.ec2",
+    "account": "000000000000",
+    "time": "2020-03-18T22:36:40Z",
+    "region": "us-east-1",
+    "resources": [],
+    "detail": {
+        "eventVersion": "1.05",
+        "userIdentity": {
+            "type": "IAMUser",
+            "principalId": "AIDABBBBBBBBBBB",
+            "arn": "arn:aws:iam::000000000000:user/example.user",
+            "accountId": "000000000000",
+            "accessKeyId": "ASIASBBBBBBBBBB",
+            "userName": "example.user",
+            "sessionContext": {
+                "sessionIssuer": {},
+                "webIdFederationData": {},
+                "attributes": {
+                    "mfaAuthenticated": "true",
+                    "creationDate": "2020-03-18T22:24:53Z"
+                }
+            },
+            "invokedBy": "signin.amazonaws.com"
+        },
+        "eventTime": "2020-03-18T22:36:40Z",
+        "eventSource": "ec2.amazonaws.com",
+        "eventName": "ModifyInstanceAttribute",
+        "awsRegion": "us-east-1",
+        "sourceIPAddress": "127.0.0.1",
+        "userAgent": "signin.amazonaws.com",
+        "requestParameters": {
+            "instanceId": "i-00e55557cb8e5f276",
+            "disableApiTermination": {
+                "value": false
+            }
+        },
+        "responseElements": {
+            "requestId": "d1ff-55j555-4fca-a7bd-f11a19656661",
+            "_return": true
+        },
+        "requestID": "d1ff-55j55-4fca-a7bd-f11a19656661",
+        "eventID": "08444554-36a0-4bf4-85fe-6b77b1f9301b",
+        "eventType": "AwsApiCall"
+    }
+}
