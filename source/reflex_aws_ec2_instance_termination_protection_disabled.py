@@ -4,7 +4,7 @@ import json
 import os
 
 import boto3
-from reflex_core import AWSRule
+from reflex_core import AWSRule, subscription_confirmation
 
 
 class InstanceTerminationProtectionDisabled(AWSRule):
@@ -34,5 +34,9 @@ class InstanceTerminationProtectionDisabled(AWSRule):
 
 def lambda_handler(event, _):
     """ Handles the incoming event """
+    print(event)
+    if subscription_confirmation.is_subscription_confirmation(event):
+        subscription_confirmation.confirm_subscription(event)
+        return
     rule = InstanceTerminationProtectionDisabled(json.loads(event["Records"][0]["body"]))
     rule.run_compliance_rule()
