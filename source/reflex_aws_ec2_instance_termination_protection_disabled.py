@@ -4,12 +4,11 @@ import json
 import os
 
 import boto3
-from reflex_core import AWSRule
+from reflex_core import AWSRule, subscription_confirmation
 
 
 class InstanceTerminationProtectionDisabled(AWSRule):
     """ Rule to detect the termination of instance protection """
-
 
     def __init__(self, event):
         super().__init__(event)
@@ -34,5 +33,10 @@ class InstanceTerminationProtectionDisabled(AWSRule):
 
 def lambda_handler(event, _):
     """ Handles the incoming event """
-    rule = InstanceTerminationProtectionDisabled(json.loads(event["Records"][0]["body"]))
+    print(event)
+    event_payload = json.loads(event["Records"][0]["body"])
+    if subscription_confirmation.is_subscription_confirmation(event_payload):
+        subscription_confirmation.confirm_subscription(event_payload)
+        return
+    rule = InstanceTerminationProtectionDisabled(event_payload)
     rule.run_compliance_rule()
